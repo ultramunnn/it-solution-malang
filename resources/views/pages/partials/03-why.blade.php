@@ -1,4 +1,4 @@
-<section class="bg-gray-50 py-24 sm:py-24">
+<section id="why" class="bg-gray-50 py-24 sm:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 

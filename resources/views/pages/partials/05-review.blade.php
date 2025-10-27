@@ -1,4 +1,4 @@
-<section class="bg-slate-100 py-16 sm:py-24 overflow-hidden">
+<section id="review" class="bg-slate-100 py-16 sm:py-24 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
             <h2 class="text-3xl sm:text-4xl font-semibold text-cyan-700 font-['Poppins']">

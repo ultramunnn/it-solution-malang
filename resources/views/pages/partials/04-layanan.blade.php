@@ -1,4 +1,4 @@
-<section class="bg-white py-16 sm:py-24">
+<section id="layanan" class="bg-white py-16 sm:py-24">
     <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div class="text-center">
             <h2 class="text-3xl sm:text-4xl font-semibold text-cyan-700 font-Poppins">

@@ -1,4 +1,4 @@
-<section class="bg-white py-16 sm:py-24">
+<section id="kontak" class="bg-white py-16 sm:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-cyan-700 font-['Poppins']">

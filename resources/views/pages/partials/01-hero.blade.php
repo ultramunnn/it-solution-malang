@@ -1,4 +1,4 @@
-<section class="relative w-full h-screen overflow-hidden">
+<section id="hero" class="relative w-full h-screen overflow-hidden">
     <div class="absolute inset-0">
         <img src="{{ asset('assets/images/bg-hero.png') }}" alt="Background Bengkel IT Solution Malang"
             class="object-cover w-full h-full" />
@@ -14,10 +14,10 @@
                 </a>
 
                 <div class="hidden md:flex items-center gap-10 text-neutral-100 font-semibold font-Poppins text-lg">
-                    <a href="#" class="hover:text-2 transition">Home</a>
-                    <a href="#" class="hover:text-2 transition">Status Service</a>
-                    <a href="#" class="hover:text-2 transition">Kontak Kami</a>
-                    <a href="#" class="hover:text-2 transition">Location</a>
+                    <a href="#hero" class="hover:text-2 transition">Home</a>
+                    <a href="#status" class="hover:text-2 transition">Status Service</a>
+                    <a href="#kontak" class="hover:text-2 transition">Kontak Kami</a>
+                    <a href="#kontak" class="hover:text-2 transition">Location</a>
                 </div>
 
                 <div class="md:hidden">
