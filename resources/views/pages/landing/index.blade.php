@@ -1,4 +1,4 @@
-<x-layouts.app title="IT Solution">
+<x-layouts.app title="IT Solution Malang">
 
     @include('pages.partials.01-hero')
 

@@ -8,7 +8,12 @@ class LandingPageController extends Controller
 {
     //
 
-    public function __invoke(){
+    public function index()
+    {
         return view("pages.landing.index");
     }
+
+  
+
+  
 }

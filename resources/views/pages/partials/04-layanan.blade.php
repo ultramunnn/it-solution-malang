@@ -1,5 +1,5 @@
 <section id="layanan" class="bg-white py-16 sm:py-24">
-    <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div class="text-center">
             <h2 class="text-3xl sm:text-4xl font-semibold text-cyan-700 font-Poppins">
                 Layanan Kami
@@ -9,7 +9,7 @@
             </p>
         </div>
 
-        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <div
                 class="bg-second border border-lime-200 rounded-2xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">

@@ -33,10 +33,10 @@
             <div>
                 <h3 class="text-base font-semibold text-white">Quick Links</h3>
                 <ul role="list" class="mt-4 space-y-2">
-                    <li><a href="#" class="text-base text-2 hover:text-white">Home</a></li>
-                    <li><a href="#" class="text-base text-2 hover:text-white">Layanan</a></li>
-                    <li><a href="#" class="text-base text-2 hover:text-white">Tentang Kami</a></li>
-                    <li><a href="#" class="text-base text-2 hover:text-white">Kontak</a></li>
+                    <li><a href="#hero" class="text-base text-2 hover:text-white">Home</a></li>
+                    <li><a href="#layanan" class="text-base text-2 hover:text-white">Layanan</a></li>
+                    <li><a href="#about" class="text-base text-2 hover:text-white">Tentang Kami</a></li>
+                    <li><a href="#kontak" class="text-base text-2 hover:text-white">Kontak</a></li>
                 </ul>
             </div>
 
