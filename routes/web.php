@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -26,4 +27,15 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'dashboard', 'index'])->name('dashboard');
+});
+
+
+Route::middleware('auth')->group(function (){
+    Route::get('/layanan', [ServiceController::class,'index'])->name('layanan.index');
+    Route::get('/layanan/create', [ServiceController::class,'create'])->name('layanan.create');
+    Route::post('/layanan', [ServiceController::class,'store'])->name('layanan.store');
+    Route::get('/layanan/{service}', [ServiceController::class,'show'])->name('layanan.show');
+    Route::get('/layanan/{service}/edit', [ServiceController::class,'edit'])->name('layanan.edit');
+    Route::put('/layanan/{service}', [ServiceController::class,'update'])->name('layanan.update');
+    Route::delete('/layanan/{service}', [ServiceController::class,'destroy'])->name('layanan.destroy');
 });
