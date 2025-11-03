@@ -69,7 +69,13 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return view('pages.auth.01-login')->with('success', 'Logout berhasil!');
+
+        // Clear all cache and redirect to home/landing page
+        return redirect()->route('home')
+            ->with('success', 'Logout berhasil!')
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
 

@@ -9,7 +9,9 @@
         
         <div class="hidden md:flex items-center gap-10 font-semibold text-lg">
             <a href="#hero" class="hover:text-2 transition">Home</a>
-            <a href="{{ route('login') }}" class="hover:text-2 transition">Status Service</a>
+            <a href="{{ route('login') }}" class="hover:text-2 transition">Login
+                
+            </a>
             <a href="#kontak" class="hover:text-2 transition">Kontak Kami</a>
             <a href="#kontak" class="hover:text-2 transition">Location</a>
         </div>

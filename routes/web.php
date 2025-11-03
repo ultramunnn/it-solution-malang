@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -24,18 +24,13 @@ Route::middleware('guest')->group(function () {
 });
 
 //route untuk user yang sudah login
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'prevent.back'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', [DashboardController::class, 'dashboard', 'index'])->name('dashboard');
-});
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-
-Route::middleware('auth')->group(function (){
-    Route::get('/layanan', [ServiceController::class,'index'])->name('layanan.index');
-    Route::get('/layanan/create', [ServiceController::class,'create'])->name('layanan.create');
-    Route::post('/layanan', [ServiceController::class,'store'])->name('layanan.store');
-    Route::get('/layanan/{service}', [ServiceController::class,'show'])->name('layanan.show');
-    Route::get('/layanan/{service}/edit', [ServiceController::class,'edit'])->name('layanan.edit');
-    Route::put('/layanan/{service}', [ServiceController::class,'update'])->name('layanan.update');
-    Route::delete('/layanan/{service}', [ServiceController::class,'destroy'])->name('layanan.destroy');
+    // Chat routes (untuk semua user yang login)
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('/chat/{user}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::get('/chat/{user}/messages', [ChatController::class, 'getMessages'])->name('chat.messages');
 });

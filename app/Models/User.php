@@ -24,7 +24,7 @@ class User extends Authenticatable
         'phone',
         'role',
         'avatar',
-        
+
     ];
 
     /**
@@ -48,5 +48,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relasi untuk messages yang dikirim user ini
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    // Relasi untuk messages yang diterima user ini
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
     }
 }
