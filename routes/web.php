@@ -10,8 +10,10 @@ Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
 // Route::get('/login', [AuthController::class, 'index'])->name('login');
 // Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::get('/lupa-password', [AuthController::class, 'lupaPassword'])->name('lupa-password');
-Route::get('/update-password', [AuthController::class, 'updatePassword'])->name('update-password');
+Route::get('/lupa-password', [AuthController::class, 'tampilkanLupaPassword'])->name('lupa-password');
+Route::post('/lupa-password', [AuthController::class, 'kirimResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'tampilkanFormReset'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'updatePassword'])->name('password.update');
 
 
 //route untuk tamu yang belum login

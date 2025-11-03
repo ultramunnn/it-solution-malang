@@ -10,34 +10,44 @@
 
             <!-- Form -->
             <form method="POST" action="{{ route('register') }}" class="flex flex-col gap-5">
-                @csrf   
+                @csrf
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Masukan nama lengkap"
-                        class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                    {{-- [FIX] Menambahkan value="{{ old('name') }}" dan @error --}}
+                    <input type="text" id="name" name="name" placeholder="Masukan nama lengkap" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" value="{{ old('name') }}" />
+                    @error('name')
+                        <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Masukan email"
-                        class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                     {{-- [FIX] Menambahkan value="{{ old('email') }}" dan @error --}}
+                    <input type="email" id="email" name="email" placeholder="Masukan email" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" value="{{ old('email') }}" />
+                    @error('email')
+                        <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Nomer Telepon</label>
-                    <input type="text" id="phone" name="phone" placeholder="Masukan nomer telepon"
-                        class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                     {{-- [FIX] Menambahkan value="{{ old('phone') }}" dan @error --}}
+                    <input type="text" id="phone" name="phone" placeholder="Masukan nomer telepon" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" value="{{ old('phone') }}" />
+                    @error('phone')
+                        <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Masukan password"
-                        class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                     {{-- [FIX] Menambahkan @error (TIDAK ADA value untuk password) --}}
+                    <input type="password" id="password" name="password" placeholder="Masukan password" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                    @error('password')
+                        <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Konfirmasi Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation"
-                        placeholder="Masukan password"
-                        class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Masukan password" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
                 </div>
 
 
@@ -52,5 +62,4 @@
             </p>
         </div>
     </section>
-
 </x-layouts.auth>

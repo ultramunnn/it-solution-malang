@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Password;
+
 class AuthController extends Controller
 {
     public function tampilkanLogin()
@@ -31,7 +33,6 @@ class AuthController extends Controller
             'email' => 'Email salah.',
             'password' => 'Password salah.',
         ])->onlyInput('email', 'password');
-
     }
 
     public function tampilkanRegister()
@@ -54,13 +55,11 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'phone'=> $request->phone,
+            'phone' => $request->phone,
             'role' => 'customer',
         ]);
 
-        Auth::login($user);
-        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil!');
-
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat! Silakan login.');
     }
 
     //fungsi logout
@@ -79,7 +78,7 @@ class AuthController extends Controller
     }
 
 
-
+    //fungsi luapa password
     public function tampilkanLupaPassword()
     {
         return view("pages.auth.03-lupapassword");
@@ -89,5 +88,47 @@ class AuthController extends Controller
         return view("pages.auth.04-updatepassword");
     }
 
+    //fungsi kirim link reset password
+    public function kirimResetLink(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
 
+        $status = Password::sendResetLink($request->only('email'));
+
+        if ($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', 'Kami telah mengirimkan link reset password ke email Anda!');
+        }
+
+        return back()->withErrors(['email' => 'Kami tidak dapat menemukan pengguna dengan alamat email tersebut.']);
+    }
+
+    //fungsi tampilkan form reset password
+    public function tampilkanFormReset(Request $request, $token)
+    {
+        return view('pages.auth.04-updatepassword', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+    }
+
+    //fungsi update password
+    public function updatePassword(Request $request)
+    {
+        $credentials = $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $status = Password::reset($credentials, function ($user, $password) {
+            $user->password = Hash::make($password);
+            $user->save();
+        });
+
+        if ($status == Password::PASSWORD_RESET) {
+            return redirect()->route('login')->with('success', 'Password Anda berhasil diubah! Silakan login.');
+        }
+
+        return back()->withErrors(['email' => 'Token reset password ini tidak valid.']);
+    }
 }
