@@ -5,6 +5,8 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -49,4 +51,14 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     // Rute Profil Pengguna
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Rute Layanan (hanya untuk admin & teknisi)
+    Route::middleware(['check.teknisi.admin'])->group(function () {
+        Route::resource('layanan', ServiceController::class);
+    });
+
+    // Rute Layanan untuk customer
+    Route::middleware('role:customer')->group(function () {
+        Route::get('/layanan-tersedia', [CustomerController::class, 'showServices'])->name('customer.layanan.list');
+    });
 });
