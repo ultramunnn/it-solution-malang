@@ -15,6 +15,16 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @forelse ($services as $service)
     <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-all hover:shadow-xl hover:-translate-y-1">
+        @if ($service->image)
+        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="w-full h-48 object-cover">
+        @else
+        {{-- Placeholder jika tidak ada gambar --}}
+        <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-400">Tidak ada gambar</span>
+        </div>
+        @endif
+
+
         <div class="p-6 flex-grow flex flex-col">
             <h3 class="text-xl font-poppins font-bold text-gray-800 mb-2">{{ $service->name }}</h3>
             <p class="text-gray-600 text-sm mb-4 flex-grow">{{ $service->description }}</p>
