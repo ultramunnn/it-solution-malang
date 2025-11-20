@@ -33,7 +33,7 @@
             <p class="text-lg font-semibold text-4">
                 Rp {{ number_format($service->price, 0, ',', '.') }}
             </p>
-            <a href="#" class="px-4 py-2 bg-4 text-white text-sm font-medium rounded-lg hover:bg-3 transition-colors">
+            <a href="{{ route('chat.index', $service->id) }}" class="px-4 py-2 bg-4 text-white text-sm font-medium rounded-lg hover:bg-3 transition-colors">
                 Pesan Layanan
             </a>
         </div>

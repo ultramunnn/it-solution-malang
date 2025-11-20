@@ -34,10 +34,10 @@
                         <div class="flex {{ $isSender ? 'justify-end' : 'justify-start' }}" data-message-id="{{ $message->id }}">
                             <div class="{{ $isSender ? 'order-2' : 'order-1' }}">
                                 <div
-                                    class="max-w-md {{ $isSender ? 'bg-3 text-white' : 'bg-white text-grey' }} rounded-2xl px-4 py-3 shadow-md">
+                                    class="max-w-md {{ $isSender ? 'bg-3 text-white' : 'bg-white text-grey' }} rounded-2xl px-3 py-2 shadow-md">
                                     @if ($message->image_path)
                                         <img src="{{ asset('storage/' . $message->image_path) }}" alt="Image"
-                                            class="rounded-lg mb-2 w-full max-w-[240px] sm:max-w-sm max-h-72 object-cover cursor-pointer hover:opacity-90"
+                                            class="rounded-lg mb-2 w-full max-w-350px sm:max-w-sm max-h-72 object-cover cursor-pointer hover:opacity-90"
                                             onclick="openImageModal('{{ asset('storage/' . $message->image_path) }}')">
                                     @endif
                                     @if ($message->message)
