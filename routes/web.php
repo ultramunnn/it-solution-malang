@@ -7,6 +7,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
@@ -31,8 +32,6 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     // Rute Umum (bisa diakses semua role)
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-
-
 
     // Link "Chat" di semua dashboard
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
@@ -60,5 +59,19 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     // Rute Layanan untuk customer
     Route::middleware('role:customer')->group(function () {
         Route::get('/layanan-tersedia', [CustomerController::class, 'showServices'])->name('customer.layanan.list');
+    });
+
+     // --- Rute untuk Customer ---
+    Route::middleware('role:customer')->group(function() {
+        Route::get('/pesan/{service}', [OrderController::class, 'create'])->name('order.create'); // Halaman konfirmasi pesanan
+        Route::post('/pesan', [OrderController::class, 'store'])->name('order.store'); // Proses pembuatan pesanan
+        Route::get('/pesanan-saya', [OrderController::class, 'indexCustomer'])->name('order.customer.index'); // Halaman "Pesanan Saya"
+    });
+
+    // --- Rute untuk Teknisi & Admin ---
+    Route::middleware('check.teknisi.admin')->group(function() {
+        Route::get('/admin/pesanan', [OrderController::class, 'indexAdmin'])->name('order.admin.index'); // Dashboard semua pesanan
+        Route::get('/admin/pesanan/{order}/edit', [OrderController::class, 'edit'])->name('order.admin.edit'); // Halaman edit status
+        Route::put('/admin/pesanan/{order}', [OrderController::class, 'update'])->name('order.admin.update'); // Proses update status
     });
 });

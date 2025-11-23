@@ -1,5 +1,4 @@
 @extends('components.layouts.dashboard')
-
 @section('title', 'Daftar Layanan Kami')
 @section('page-title', 'Daftar Layanan Kami')
 
@@ -18,7 +17,6 @@
         @if ($service->image)
         <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="w-full h-48 object-cover">
         @else
-        {{-- Placeholder jika tidak ada gambar --}}
         <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
             <span class="text-gray-400">Tidak ada gambar</span>
         </div>
@@ -33,7 +31,7 @@
             <p class="text-lg font-semibold text-4">
                 Rp {{ number_format($service->price, 0, ',', '.') }}
             </p>
-            <a href="{{ route('chat.index', $service->id) }}" class="px-4 py-2 bg-4 text-white text-sm font-medium rounded-lg hover:bg-3 transition-colors">
+            <a href="{{ route('order.create', ['service' => $service]) }}" class="px-4 py-2 bg-4 text-white text-sm font-medium rounded-lg hover:bg-3 transition-colors">
                 Pesan Layanan
             </a>
         </div>

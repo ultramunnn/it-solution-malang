@@ -61,4 +61,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }
+    // Relasi untuk service orders yang dibuat user ini
+    public function serviceOrders() {
+    return $this->hasMany(ServiceOrder::class);
+}
 }

@@ -43,13 +43,13 @@
     </section>
 
     @push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" position="center-top"></script>
 
     @if (session('success'))
     <script>
         const Toast = Swal.mixin({
             toast: true
-            , position: 'center-top', 
+            , position: 'top', 
             showConfirmButton: false
             , timer: 3000, 
             timerProgressBar: true
