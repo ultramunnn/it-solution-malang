@@ -24,15 +24,25 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Login berhasil!');
+        $user = User::where('email', 'like', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'Email yang Anda masukkan tidak terdaftar.',
+            ])->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'Email salah.',
-            'password' => 'Password salah.',
-        ])->onlyInput('email', 'password');
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'Password yang Anda masukkan salah.',
+            ])->onlyInput('email'); 
+        }
+
+        Auth::login($user, $request->boolean('remember'));
+
+        $request->session()->regenerate();
+
+        return redirect()->route('dashboard')->with('success', 'Login berhasil!');
     }
 
     public function tampilkanRegister()

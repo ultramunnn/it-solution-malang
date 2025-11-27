@@ -9,11 +9,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-1 font-sans">
-    <div class="flex h-screen overflow-hidden">
+<body class="bg-1 font-sans overflow-x-hidden">
+    <div class="relative min-h-screen lg:flex">
 
         <!-- Sidebar -->
-        <aside id="sidebar" class="fixed lg:relative lg:translate-x-0 -translate-x-full lg:w-64 w-64 bg-4 text-white flex flex-col transition-all duration-300 z-20 shadow-xl">
+        <aside id="sidebar"
+            class="bg-4 text-white w-64 fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30 shadow-xl flex flex-col">
 
             <!-- Logo/Brand -->
             <div class="p-6 border-b border-3 flex items-center justify-between">
@@ -105,9 +106,6 @@
             </a>
         </aside>
 
-        <!-- Overlay (mobile only) -->
-        <div id="overlay" class="fixed inset-0 bg-black/40 hidden lg:hidden z-10"></div>
-
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Header -->
@@ -136,6 +134,9 @@
                 @yield('content')
             </main>
         </div>
+        
+        <!-- Overlay (mobile only) -->
+        <div id="overlay" class="fixed inset-0 bg-black/50 z-20 lg:hidden hidden"></div>
     </div>
 
     <!-- Script Sidebar -->
@@ -145,32 +146,35 @@
         const closeSidebar = document.getElementById('closeSidebar');
         const overlay = document.getElementById('overlay');
 
-        sidebarToggle ? .addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full');
-            overlay.classList.remove('hidden');
-        });
+        if (sidebarToggle){
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            });
+        }
 
-        closeSidebar ? .addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
+        if (closeSidebar){
+            closeSidebar.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            });
+        }
 
-        overlay ? .addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
-
+        if (overlay){
+            overlay.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            });
+        }
     </script>
 
     <!-- Prevent Back History After Logout -->
     <script>
         function checkAuthentication() {
             fetch('{{ route("dashboard") }}', {
-                method: 'GET'
-                , credentials: 'same-origin'
-                , headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
             }).then(response => {
                 if (response.status === 401 || response.redirected) {
                     window.location.replace('{{ route("home") }}');
@@ -179,21 +183,17 @@
                 window.location.replace('{{ route("home") }}');
             });
         }
-
         window.addEventListener('load', function() {
             if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
                 checkAuthentication();
             }
         });
-
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
                 checkAuthentication();
             }
         });
-
         window.addEventListener('beforeunload', function() {});
-
     </script>
 
     @stack('scripts')
