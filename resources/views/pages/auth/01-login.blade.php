@@ -13,7 +13,7 @@
                 @csrf
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Email / Username</label>
-                    <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Masukan email or username" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500 @error('email') border-red-500 @enderror" />
+                    <input type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Masukan email or username" class="border {{ $errors->has('email') ? 'border-red-500' : 'border-neutral-300' }} rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
 
                     @error('email')
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
@@ -22,9 +22,8 @@
 
                 <div class="flex flex-col">
                     <label class="text-sm text-grey mb-1">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Masukan password" class="border border-neutral-300 rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500 @error('password') border-red-500 @enderror" />
+                    <input type="password" id="password" name="password" placeholder="Masukan password" class="border {{ $errors->has('password') ? 'border-red-500' : 'border-neutral-300' }} rounded-md p-4 placeholder-gray-400 focus:outline-none focus:ring focus:ring-cyan-500" />
 
-                
                     @error('password')
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                     @enderror

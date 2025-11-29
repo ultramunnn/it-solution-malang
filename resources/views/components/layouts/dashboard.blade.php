@@ -13,8 +13,7 @@
     <div class="relative min-h-screen lg:flex">
 
         <!-- Sidebar -->
-        <aside id="sidebar"
-            class="bg-4 text-white w-64 fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30 shadow-xl flex flex-col">
+        <aside id="sidebar" class="bg-4 text-white w-64 fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30 shadow-xl flex flex-col">
 
             <!-- Logo/Brand -->
             <div class="p-6 border-b border-3 flex items-center justify-between">
@@ -68,7 +67,6 @@
                     </li>
                     @endif
 
-                    <!-- [HANYA UNTUK TEKNISI & ADMIN] -->
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teknisi')
                     <li>
                         <a href="{{ route('layanan.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('layanan.*') ? 'bg-3 text-white' : 'hover:bg-3/70 hover:text-white text-gray-200' }}">
@@ -94,9 +92,7 @@
             <a href="{{ route('profile.edit') }}">
                 <div class="p-4 border-t border-3 bg-3/20">
                     <div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-3/40 hover:bg-3/60 transition-colors cursor-pointer shadow-sm">
-                        <div class="w-10 h-10 rounded-full bg-2 flex items-center justify-center text-4 font-bold">
-                            {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-                        </div>
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name).'&background=ffb221&color=2e838f' }}" alt="{{ auth()->user()->name }}">
                         <div class="flex-1 min-w-0">
                             <p class="font-medium truncate">{{ auth()->user()->name ?? 'User' }}</p>
                             <p class="text-sm text-2 truncate">{{ auth()->user()->email ?? 'user@email.com' }}</p>
@@ -134,7 +130,7 @@
                 @yield('content')
             </main>
         </div>
-        
+
         <!-- Overlay (mobile only) -->
         <div id="overlay" class="fixed inset-0 bg-black/50 z-20 lg:hidden hidden"></div>
     </div>
@@ -146,35 +142,38 @@
         const closeSidebar = document.getElementById('closeSidebar');
         const overlay = document.getElementById('overlay');
 
-        if (sidebarToggle){
+        if (sidebarToggle) {
             sidebarToggle.addEventListener('click', () => {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
             });
         }
 
-        if (closeSidebar){
+        if (closeSidebar) {
             closeSidebar.addEventListener('click', () => {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             });
         }
 
-        if (overlay){
+        if (overlay) {
             overlay.addEventListener('click', () => {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             });
         }
+
     </script>
 
     <!-- Prevent Back History After Logout -->
     <script>
         function checkAuthentication() {
             fetch('{{ route("dashboard") }}', {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                method: 'GET'
+                , credentials: 'same-origin'
+                , headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
             }).then(response => {
                 if (response.status === 401 || response.redirected) {
                     window.location.replace('{{ route("home") }}');
@@ -194,6 +193,7 @@
             }
         });
         window.addEventListener('beforeunload', function() {});
+
     </script>
 
     @stack('scripts')
