@@ -63,11 +63,11 @@
                 </p>
 
                 <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <a href="#"
+                    <a href="{{ route('login') }}"
                         class="bg-second text-grey text-center hover:text-3 font-semibold text-base sm:text-lg px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-primary-300 transition-colors duration-300 w-63">
                         Lacak Status Service
                     </a>
-                    <a href="#"
+                    <a href="https://wa.me/6285724252421"
                         class="bg-second text-center  text-grey hover:text-3 font-semibold text-base sm:text-lg px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-primary-300 transition-colors duration-300 w-63">
                         Hubungi Kami
                     </a>
