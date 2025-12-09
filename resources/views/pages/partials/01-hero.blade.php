@@ -35,9 +35,9 @@
     <div x-show="open" class="md:hidden absolute top-full left-0 w-full bg-gray-800/70 backdrop-blur-sm shadow-lg">
         <div class="flex flex-col items-start px-8 gap-6 py-8 font-semibold text-lg text-white">
             <a href="#hero" class="hover:text-gray-300 transition">Home</a>
-            <a href="#" class="hover:text-gray-300 transition">Status Service</a>
-            <a href="#" class="hover:text-gray-300 transition">Kontak Kami</a>
-            <a href="#" class="hover:text-gray-300 transition">Location</a>
+            <a href="{{ route('login') }}" class="hover:text-gray-300 transition">Login</a>
+            <a href="#kontak" class="hover:text-gray-300 transition">Kontak Kami</a>
+            <a href="#kontak" class="hover:text-gray-300 transition">Location</a>
         </div>
     </div>
 </header>
